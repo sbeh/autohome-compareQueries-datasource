@@ -203,6 +203,8 @@ define(['angular', 'lodash', 'moment'], function(angular, _, moment) {
       var len = timeShift.length
       var i = 0
 
+      if (dateTime.charAt(i) === '-')
+        i++
       while (i < len && !isNaN(dateTime.charAt(i))) {
         i++
         if (i > 10) {
