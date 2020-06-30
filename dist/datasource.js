@@ -122,14 +122,18 @@ define(['angular', 'lodash', 'moment'], function(angular, _, moment) {
                 })
                 .then(function(compareResult) {
                   var timeShiftAliases = typeof timeShiftAlias == 'string' ? timeShiftAlias.split(',') : [timeShiftAlias]
-                  var tsa
+                  var tsal
                   var timeShiftValues = typeof timeShiftValue == 'string' ? timeShiftValue.split(',') : [timeShiftValue]
-                  var tsv
+                  var tsvl
                   
                   var data = compareResult.data
                   data.forEach(function(line) {
-                    tsa = timeShiftAliases.shift()
-                    tsv = timeShiftValues.shift()
+                    let tsa = timeShiftAliases.shift()
+                    let tsv = timeShiftValues.shift()
+                    if (!tsa) tsa = tsal
+                    if (!tsv) tsv = tsvl
+                    tsal = tsa
+                    tsvl = tsv
                     if (
                       typeof timeShift.alias == 'undefined' ||
                       timeShift.alias == null ||
