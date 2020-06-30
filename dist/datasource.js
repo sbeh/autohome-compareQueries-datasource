@@ -121,9 +121,9 @@ define(['angular', 'lodash', 'moment'], function(angular, _, moment) {
                   return compareResult
                 })
                 .then(function(compareResult) {
-                  var timeShiftAliases = typeof timeShiftAlias == 'string' ? timeShiftAlias.split(',') : []
+                  var timeShiftAliases = typeof timeShiftAlias == 'string' ? timeShiftAlias.split(',') : [timeShiftAlias]
                   var tsa
-                  var timeShiftValues = typeof timeShiftValue == 'string' ? timeShiftValue.split(',') : []
+                  var timeShiftValues = typeof timeShiftValue == 'string' ? timeShiftValue.split(',') : [timeShiftValue]
                   var tsv
                   
                   var data = compareResult.data
