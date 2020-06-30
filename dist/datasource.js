@@ -121,20 +121,27 @@ define(['angular', 'lodash', 'moment'], function(angular, _, moment) {
                   return compareResult
                 })
                 .then(function(compareResult) {
+                  var timeShiftAliases = typeof timeShiftAlias == 'string' ? timeShiftAlias.split(',') : []
+                  var tsa
+                  var timeShiftValues = typeof timeShiftValue == 'string' ? timeShiftValue.split(',') : []
+                  var tsv
+                  
                   var data = compareResult.data
                   data.forEach(function(line) {
+                    tsa = timeShiftAliases.shift()
+                    tsv = timeShiftValues.shift()
                     if (
                       typeof timeShift.alias == 'undefined' ||
                       timeShift.alias == null ||
                       timeShift.alias == ''
                     ) {
-                      line.target = line.target + '_' + timeShiftValue
+                      line.target = line.target + '_' + tsv
                     } else {
-                      line.target = line.target + '_' + timeShiftAlias
+                      line.target = line.target + '_' + tsa
                     }
 
                     if (target.process) {
-                      let timeShift_ms = parseShiftToMs(timeShiftValue)
+                      let timeShift_ms = parseShiftToMs(tsv)
 
                       if (line.type == 'table') {
                         if (line.rows) {
